@@ -1,10 +1,10 @@
 # 公開用エピソードHTML
 
-このフォルダには、公開する各話のHTMLを保存します。現時点では本編エピソードはありません。
+このフォルダには、公開する各話のHTMLを保存します。第1話を公開済みです。
 
 ## ファイル名
 
-`episode-001.html`、`episode-002.html` のように、原稿と同じ3桁の連番を使用します。
+`ep001.html`、`ep002.html` のように、3桁の連番を使用します。
 
 ## HTMLの基本構造
 
@@ -24,18 +24,18 @@
 
 ## 第1話の公開手順
 
-1. `../../episodes_md/episode-001.md` の内容が確定していることを確認する。
-2. `episode-001.html` を作成し、ページタイトルと概要を設定する。
+1. `../../episodes_md/ep001_shinjin_ai_haizoku.md` の内容が確定していることを確認する。
+2. `ep001.html` を作成し、ページタイトルと概要を設定する。
 3. トップへ戻るリンクは `../index.html`、共通CSSは `../style.css` を指定する。
 4. 5つの `.episode-page` に、原稿の各ページを一つずつ対応させる。
 5. 第5ページだけに `.learning-page` を追加する。
-6. `../index.html` から `episodes/episode-001.html` へリンクする。
+6. `../index.html` から `episodes/ep001.html` へリンクする。
 7. ファイルを直接移動しても壊れないよう、リンクと画像は相対パスで指定する。
 
 ## 画像と4コマ版の追加
 
 - キャラクター画像は `../assets/images/characters/` に配置する。
-- 話ごとの画像は `../assets/images/episodes/episode-001/` のように分ける。
+- 話ごとの画像は `../assets/images/episodes/ep001/` のように分ける。
 - 挿絵には `.episode-illustration`、4コマ画像には `.comic-panel` を使用する。
 - 文章版と漫画版を併設し、画像が読み込めない場合も本文を読める構成にする。
 - 画像には内容を伝える `alt` を設定し、漫画には短い文字起こしを添える。

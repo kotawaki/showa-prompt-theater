@@ -10,7 +10,7 @@
 
 ## 現在の状態
 
-このリポジトリは、作品設定と公開サイトを管理するための初期土台です。本編エピソードはまだ収録していません。
+作品設定と公開サイトに加え、第1話「新人AI、配属される」を収録しています。
 
 ## フォルダ構成
 
@@ -29,26 +29,26 @@ showa-prompt-theater/
 ## 運用方法
 
 1. 執筆前に `settings/` と `characters/` を確認します。
-2. 本編原稿は `episodes_md/episode-XXX.md` として追加します。
+2. 本編原稿は `episodes_md/epXXX_slug.md` として追加します。
 3. 各話で扱ったプロンプトと用語を、それぞれの台帳にも追記します。
-4. 公開用HTMLは `docs/episodes/episode-XXX.html` として追加します。
+4. 公開用HTMLは `docs/episodes/epXXX.html` として追加します。
 5. `docs/index.html` に新しい話へのリンクを追加します。
 6. 実在サービス名、規約回避につながる説明、危険な自動化手順は書きません。必要な題材はフィクションとして抽象化します。
 
 ファイル名の `XXX` は `001` から始まる3桁の連番を使用します。公開前には、5ページ構成、スマホでの読みやすさ、キャラクターの口調、注意事項を確認してください。
 
-## 第1話を追加する方法
+## エピソードを追加する方法
 
-第1話は、原稿、公開ページ、学習資料の順に追加します。
+各話は、原稿、公開ページ、学習資料の順に追加します。第1話では次のファイル名を使用しています。
 
-1. `episodes_md/README.md` のテンプレートを使い、`episodes_md/episode-001.md` を作成します。
+1. `episodes_md/README.md` のテンプレートを使い、`episodes_md/ep001_shinjin_ai_haizoku.md` を作成します。
 2. 1ページ目から4ページ目を「起・承・転・結」、5ページ目を学びのページとして執筆します。
 3. 第1話で使ったプロンプトを `prompts/showa_prompts.md` に追記します。
 4. 初登場の用語を `glossary/terms.md` に追記します。
-5. `docs/episodes/episode-001.html` を作成し、共通CSSとして `../style.css` を読み込みます。
+5. `docs/episodes/ep001.html` を作成し、共通CSSとして `../style.css` を読み込みます。
 6. 本文4ページには `.episode-page`、学びのページには `.episode-page.learning-page` を指定します。
 7. 5ページ全体を `.episode-reader` で囲みます。
-8. `docs/index.html` のエピソード欄に、第1話のタイトルと `episodes/episode-001.html` へのリンクを追加します。
+8. `docs/index.html` のエピソード欄に、第1話のタイトルと `episodes/ep001.html` へのリンクを追加します。
 9. `docs/prompts.html` と `docs/glossary.html` に、第1話で追加した内容を掲載します。
 10. 公開前に、リンク切れ、縦書き表示、スマホ幅での横送り、5ページ目の横書きを確認します。
 
@@ -66,7 +66,7 @@ showa-prompt-theater/
 
 ### エピソード挿絵
 
-- 画像は `docs/assets/images/episodes/episode-001/` のように話数別で管理します。
+- 画像は `docs/assets/images/episodes/ep001/` のように話数別で管理します。
 - 挿絵は `.episode-illustration` を使用し、本文を読む順序を邪魔しない位置へ置きます。
 - 画像がなくても物語を読める状態を保ちます。
 
