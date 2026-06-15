@@ -162,7 +162,7 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
 
 .link-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
   padding: 5rem 0;
   border-top: 1px solid var(--line);
@@ -255,6 +255,60 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
 .prompt-card blockquote { margin: 1rem 0; font-size: 1.25rem; }
 .episode-label { color: var(--muted); font-size: 0.8rem; }
 .boss-translation { padding-top: 1rem; border-top: 1px solid var(--line); }
+
+.idea-bank-main { max-width: 980px; }
+.idea-bank-title { margin-bottom: 2.5rem; }
+
+.idea-bank-intro {
+  padding: clamp(1.5rem, 5vw, 2.5rem);
+  background: rgba(251, 247, 235, 0.78);
+  border: 1px solid var(--line);
+  border-left: 5px solid var(--red);
+}
+
+.idea-bank-intro h2 { margin-top: 0; font-size: clamp(1.4rem, 4vw, 2rem); }
+.idea-bank-intro p { margin-bottom: 0.75rem; }
+.idea-bank-note { padding-top: 0.8rem; color: var(--muted); border-top: 1px solid var(--line); font-size: 0.88rem; }
+
+.idea-bank-section { padding: 4rem 0 0; }
+.idea-bank-section .section-heading { margin-bottom: 1.5rem; }
+.idea-bank-section .section-heading h2 { font-size: clamp(1.6rem, 5vw, 2.6rem); }
+
+.idea-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.idea-card {
+  min-width: 0;
+  padding: clamp(1.3rem, 4vw, 2rem);
+  background: var(--paper-light);
+  border: 1px solid var(--line);
+  box-shadow: 0 8px 24px rgba(57, 47, 29, 0.08);
+}
+
+.character-idea-card { border-top: 4px solid var(--blue); }
+.episode-idea-card { border-top: 4px solid var(--red); }
+.idea-kind { margin: 0; color: var(--muted); font-family: system-ui, sans-serif; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; }
+.idea-card h3 { margin: 0.25rem 0 0.8rem; font-size: clamp(1.35rem, 4vw, 1.8rem); }
+.idea-card p { margin: 0 0 0.65rem; }
+.idea-card p:last-child { margin-bottom: 0; }
+.idea-subtitle { padding-bottom: 0.65rem; color: var(--red); border-bottom: 1px solid var(--line); font-weight: 700; }
+
+.line-memo-card {
+  padding: clamp(1.4rem, 5vw, 2.5rem);
+  background: var(--paper-light);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.line-memo-card > p { margin: 0; padding: 0.7rem 0; border-bottom: 1px dotted var(--line); }
+.line-memo-card strong { color: var(--red); }
+.line-memo-blank { margin-top: 1.5rem; padding: 1rem; color: var(--muted); background: rgba(166, 56, 45, 0.04); border: 1px dashed var(--line); }
+.line-memo-blank p { margin: 0.35rem 0; }
+.idea-bank-back { margin: 4rem 0 0; text-align: center; }
+.idea-bank-back a { color: var(--red); font-weight: 700; text-underline-offset: 0.3em; }
 
 .episode-list {
   display: grid;
@@ -477,6 +531,15 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
   .episode-pagination { align-items: center; flex-direction: column; }
   .episode-link { grid-template-columns: 1fr; }
   .episode-count { grid-row: auto; }
+  .idea-bank-title h1 { font-size: clamp(2.2rem, 12vw, 3.5rem); }
+  .idea-bank-section { padding-top: 3rem; }
+  .idea-card-grid { grid-template-columns: 1fr; }
+  .idea-card { padding: 1.25rem; }
+  .line-memo-card { padding: 1.25rem; }
+}
+
+@media (min-width: 721px) and (max-width: 960px) {
+  .link-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 720px) and (max-height: 700px) {
