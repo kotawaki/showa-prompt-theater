@@ -108,5 +108,56 @@
     <p><a href="../index.html">作品トップへ戻る</a></p>
     <p><small>この物語はフィクション？です。</small></p>
   </footer>
+
+  <script>
+    (() => {
+      const reader = document.querySelector('.episode-reader');
+      const pages = Array.from(reader?.querySelectorAll('.episode-page') ?? []);
+
+      if (!reader || pages.length === 0) return;
+
+      let frameId = 0;
+
+      const updatePageState = () => {
+        frameId = 0;
+
+        const readerRect = reader.getBoundingClientRect();
+        const readerCenter = readerRect.left + readerRect.width / 2;
+        let activeIndex = 0;
+        let nearestDistance = Number.POSITIVE_INFINITY;
+
+        pages.forEach((page, index) => {
+          const pageRect = page.getBoundingClientRect();
+          const pageCenter = pageRect.left + pageRect.width / 2;
+          const distance = pageCenter - readerCenter;
+          const normalizedOffset = Math.max(-1.25, Math.min(1.25, distance / readerRect.width));
+          const depth = Math.min(1, Math.abs(normalizedOffset));
+
+          page.style.setProperty('--page-rotation', `${(normalizedOffset * -7).toFixed(2)}deg`);
+          page.style.setProperty('--page-scale', (1 - depth * 0.025).toFixed(3));
+
+          if (Math.abs(distance) < nearestDistance) {
+            nearestDistance = Math.abs(distance);
+            activeIndex = index;
+          }
+        });
+
+        pages.forEach((page, index) => {
+          page.classList.toggle('is-active', index === activeIndex);
+          page.classList.toggle('is-prev', index < activeIndex);
+          page.classList.toggle('is-next', index > activeIndex);
+        });
+      };
+
+      const requestPageStateUpdate = () => {
+        if (frameId) return;
+        frameId = window.requestAnimationFrame(updatePageState);
+      };
+
+      reader.addEventListener('scroll', requestPageStateUpdate, { passive: true });
+      window.addEventListener('resize', requestPageStateUpdate, { passive: true });
+      window.requestAnimationFrame(updatePageState);
+    })();
+  </script>
 </body>
 </html>

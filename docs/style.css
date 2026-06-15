@@ -291,26 +291,65 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
 .episode-reader {
   display: flex;
   gap: 1.25rem;
-  padding: 2rem 0 3rem;
+  padding: 2rem max(0px, calc((100% - min(88vw, 35rem)) / 2)) 3rem;
   overflow-x: auto;
+  overflow-y: hidden;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: 6vw;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+  perspective: 1100px;
+  perspective-origin: center;
+  touch-action: pan-x pinch-zoom;
+  scrollbar-width: none;
 }
 
+.episode-reader::-webkit-scrollbar { display: none; }
+
 .episode-page {
+  --page-rotation: 0deg;
+  --page-scale: 1;
+  position: relative;
   flex: 0 0 min(88vw, 35rem);
   height: min(72vh, 42rem);
   padding: clamp(1.5rem, 5vw, 3rem);
-  overflow-x: auto;
+  overflow: hidden;
   scroll-snap-align: center;
-  background: var(--paper-light);
+  scroll-snap-stop: always;
+  background:
+    linear-gradient(90deg, rgba(57, 47, 29, 0.045), transparent 9%, transparent 91%, rgba(57, 47, 29, 0.055)),
+    var(--paper-light);
   border: 1px solid var(--line);
-  box-shadow: var(--shadow);
+  border-radius: 2px 7px 7px 2px;
+  box-shadow:
+    0 18px 35px rgba(57, 47, 29, 0.14),
+    -7px 0 13px rgba(57, 47, 29, 0.06),
+    inset -1px 0 rgba(255, 255, 255, 0.72);
   writing-mode: vertical-rl;
   text-orientation: upright;
   font-size: clamp(1.2rem, 3vw, 1.55rem);
   line-height: 2.2;
   letter-spacing: 0.08em;
+  transform: rotateY(var(--page-rotation)) scale(var(--page-scale));
+  transform-origin: center center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  opacity: 0.92;
+  transition: transform 220ms ease-out, box-shadow 220ms ease-out, opacity 180ms ease-out;
+  contain: layout paint style;
 }
+
+.episode-page.is-active {
+  z-index: 2;
+  opacity: 1;
+  box-shadow:
+    0 21px 42px rgba(57, 47, 29, 0.17),
+    -8px 0 15px rgba(57, 47, 29, 0.07),
+    inset -1px 0 rgba(255, 255, 255, 0.78);
+}
+
+.episode-page.is-prev { z-index: 1; transform-origin: right center; }
+.episode-page.is-next { z-index: 1; transform-origin: left center; }
 
 .episode-page h2 {
   margin: 0 0 0 2rem;
@@ -327,25 +366,24 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
 
 .episode-page.learning-page {
   writing-mode: horizontal-tb;
-  overflow-y: auto;
-  font-size: clamp(1rem, 2.6vw, 1.15rem);
-  line-height: 1.9;
+  font-size: clamp(0.88rem, 2.35vw, 1.05rem);
+  line-height: 1.65;
   letter-spacing: 0.03em;
 }
 
-.learning-page h2 { margin: 0 0 1rem; font-size: 1.6em; }
-.learning-page h3 { margin: 0 0 0.7rem; font-size: 1.15em; }
-.learning-page p { margin: 0 0 1rem; }
+.learning-page h2 { margin: 0 0 0.7rem; font-size: 1.45em; }
+.learning-page h3 { margin: 0 0 0.45rem; font-size: 1.08em; }
+.learning-page p { margin: 0 0 0.65rem; }
 .learning-page blockquote {
-  margin: 1rem 0 2rem;
-  padding: 1.2rem;
+  margin: 0.7rem 0 1.1rem;
+  padding: 0.8rem 1rem;
   background: rgba(166, 56, 45, 0.06);
   border-left: 4px solid var(--red);
-  font-size: 1.1em;
+  font-size: 1.05em;
   font-weight: 700;
 }
-.learning-section { padding-top: 1.25rem; border-top: 1px solid var(--line); }
-.bonus-talk p { margin-bottom: 0.8rem; }
+.learning-section { padding-top: 0.8rem; border-top: 1px solid var(--line); }
+.bonus-talk p { margin-bottom: 0.45rem; }
 
 .episode-pagination {
   display: flex;
@@ -386,13 +424,46 @@ main { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; }
   .page-main { padding-top: 3rem; }
   .vertical-sample { height: 65vh; padding: 1.5rem; }
   .episode-main { width: calc(100% - 1rem); padding-top: 2rem; }
-  .episode-reader { gap: 0.75rem; padding-top: 1rem; }
-  .episode-page { flex-basis: 91vw; height: 72vh; padding: 1.35rem; line-height: 2; }
+  .episode-reader { gap: 0.75rem; padding: 1rem 4.5vw 2rem; scroll-padding-inline: 4.5vw; }
+  .episode-page {
+    flex-basis: 91vw;
+    height: min(76svh, 42rem);
+    padding: 1.25rem;
+    font-size: clamp(1rem, 4.35vw, 1.2rem);
+    line-height: 1.9;
+  }
+  .episode-page h2 { margin-left: 1.35rem; }
+  .episode-page p { margin-left: 1.2rem; }
+  .episode-page.learning-page { font-size: clamp(0.78rem, 3.45vw, 0.94rem); line-height: 1.48; }
+  .learning-page blockquote { margin-bottom: 0.75rem; padding: 0.55rem 0.7rem; }
+  .learning-section { padding-top: 0.55rem; }
   .episode-pagination { align-items: center; flex-direction: column; }
   .episode-link { grid-template-columns: 1fr; }
   .episode-count { grid-row: auto; }
 }
 
+@media (max-width: 720px) and (max-height: 700px) {
+  .episode-page {
+    height: 76svh;
+    padding: 1rem;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .episode-page h2 { margin-left: 1rem; }
+  .episode-page p { margin-left: 0.9rem; }
+  .episode-page.learning-page { font-size: 0.7rem; line-height: 1.35; }
+  .learning-page h2 { margin-bottom: 0.45rem; }
+  .learning-page p { margin-bottom: 0.35rem; }
+  .learning-page blockquote { margin: 0.4rem 0 0.55rem; padding: 0.4rem 0.55rem; }
+  .learning-section { padding-top: 0.4rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { scroll-behavior: auto !important; transition: none !important; }
+  .episode-reader { perspective: none; }
+  .episode-page {
+    transform: none !important;
+    opacity: 1;
+    box-shadow: var(--shadow);
+  }
 }
